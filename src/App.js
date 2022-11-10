@@ -1,23 +1,91 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react';
+
+const colorOptions = ["black", "red", "green", "blue"];
 
 function App() {
+   const [inputValue, setInputValue] = useState("");
+   const [tasks, setTasks] = useState([]);
+   const [colors, setColors] = useState({});
+   console.log(colors); // please, look how it looks in console when you add items
+
+   let index;
+
+   function handleChange(event) {
+     setInputValue(event.target.value);
+   }
+
+   function addTask() {
+     const newTaskIndex = tasks.length;
+     setTasks([...tasks, inputValue]);
+     setColors({ ...colors, [newTaskIndex]: colorOptions[0] });
+   }
+   function resetInput() {
+     setInputValue("");
+   }
+
+   function handleClick() {
+     setTasks([...tasks, inputValue]);
+     setInputValue("");
+   }
+   function deleteTask(taskIndex) {
+     setTasks([...tasks.slice(0, taskIndex), ...tasks.slice(taskIndex + 1)]);
+   }
+
+   useEffect(() => {
+     const listener = (event) => {
+       if (event.code === "Enter" || event.code === "NumpadEnter") {
+         console.log("Enter key was pressed. Run your function.");
+         event.preventDefault();
+         handleClick();
+       }
+     };
+     document.addEventListener("keydown", listener);
+     return () => {
+       document.removeEventListener("keydown", listener);
+     };
+   }, []);
+
+   const result = tasks.map((task, index) => {
+     return (
+       <div className="result" key={index}>
+         <p style={{ color: colors[index] }} contentEditable="true" key={index}>
+           {task}{" "}
+         </p>
+         <button className="delete_item" onClick={() => deleteTask(index)}>
+           x
+         </button>
+         <select
+           value={colors[index]}
+           onChange={(event) =>
+             setColors({ ...colors, [index]: event.target.value })
+           }
+         >
+           {colorOptions.map((text, index) => {
+             return <option key={index}>{text}</option>;
+           })}
+         </select>
+       </div>
+     );
+   });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input value={inputValue} onChange={handleChange} />
+
+      <div> {result} </div>
+
+      <button onClick={() => addTask()}>add item</button>
+
+      <button onClick={() => resetInput()}>reset inputValue</button>
+
+      <button
+        onClick={() => {
+          addTask();
+          resetInput();
+        }}
+      >
+        add + reset
+      </button>
     </div>
   );
 }
