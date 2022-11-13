@@ -1,5 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import Tasks from './Tasks';
+import Buttons from './Buttons'
 
 const colorOptions = ["black", "red", "green", "blue"];
 
@@ -72,7 +74,11 @@ function App() {
     <div>
       <input value={inputValue} onChange={handleChange} />
 
+      <Tasks />
+
       <div> {result} </div>
+
+      <Buttons />
 
       <button onClick={() => addTask()}>add item</button>
 
