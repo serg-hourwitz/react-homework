@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import Tasks from './Tasks';
-import Buttons from './Buttons';
+import Tasks from "./Tasks";
+import Buttons from "./Buttons";
 
 const colorOptions = ["black", "red", "green", "blue"];
 
@@ -70,21 +70,11 @@ export default function App2() {
         value={inputValue}
         onChange={(event) => setInputValue(event.target.value)}
       />
-<Tasks />
+      <Tasks />
       <div>{result}</div>
-<Buttons />
-      <button onClick={() => addTask()}>add item</button>
 
-      <button onClick={() => resetInput()}>reset inputValue</button>
+      <Buttons addTask={addTask} resetInput={resetInput} />
 
-      <button
-        onClick={() => {
-          addTask();
-          resetInput();
-        }}
-      >
-        add + reset
-      </button>
     </div>
   );
 }

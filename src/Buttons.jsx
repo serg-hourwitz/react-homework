@@ -1,19 +1,18 @@
 function Buttons(props) {
-  console.log(props);
   return (
     <div>
-      {/* <button onClick={() => addTask()}>add item</button>
+      <button onClick={() => props.addTask()}>add item</button>
 
-      <button onClick={() => resetInput()}>reset inputValue</button>
+      <button onClick={() => props.resetInput()}>reset inputValue</button>
 
       <button
         onClick={() => {
-          addTask();
-          resetInput();
+          props.addTask();
+          props.resetInput();
         }}
       >
         add + reset
-      </button> */}
+      </button>
     </div>
   );
 }
