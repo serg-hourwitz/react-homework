@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import "./App.css";
 import Tasks from './Tasks';
 import Buttons from './Buttons';
 

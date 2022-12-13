@@ -11,7 +11,6 @@ function App() {
    const [colors, setColors] = useState({});
    console.log(colors); // please, look how it looks in console when you add items
 
-   let index;
 
    function handleChange(event) {
      setInputValue(event.target.value);
@@ -78,20 +77,9 @@ function App() {
 
       <div> {result} </div>
 
-      <Buttons />
+      <Buttons a={true} />
 
-      <button onClick={() => addTask()}>add item</button>
-
-      <button onClick={() => resetInput()}>reset inputValue</button>
-
-      <button
-        onClick={() => {
-          addTask();
-          resetInput();
-        }}
-      >
-        add + reset
-      </button>
+      
     </div>
   );
 }
