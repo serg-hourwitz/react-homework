@@ -47,39 +47,22 @@ function App() {
      };
    }, []);
 
-   const result = tasks.map((task, index) => {
-     return (
-       <div className="result" key={index}>
-         <p style={{ color: colors[index] }} contentEditable="true" key={index}>
-           {task}{" "}
-         </p>
-         <button className="delete_item" onClick={() => deleteTask(index)}>
-           x
-         </button>
-         <select
-           value={colors[index]}
-           onChange={(event) =>
-             setColors({ ...colors, [index]: event.target.value })
-           }
-         >
-           {colorOptions.map((text, index) => {
-             return <option key={index}>{text}</option>;
-           })}
-         </select>
-       </div>
-     );
-   });
+   
   return (
     <div>
       <input value={inputValue} onChange={handleChange} />
 
-      <Tasks />
+      <Tasks 
+        tasks={tasks}
+        colors={colors}
+        deleteTask={deleteTask}
+        setColors={setColors}
+        colorOptions={colorOptions}
+      />
 
-      <div> {result} </div>
+      {/* <div> {result} </div> */}
 
-      <Buttons a={true} />
-
-      
+      <Buttons addTask={addTask} resetInput={resetInput} />
     </div>
   );
 }
