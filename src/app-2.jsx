@@ -41,40 +41,11 @@ export default function App2() {
     };
   }, [listener]);
 
-  const result = tasks.map((task, index) => {
-    return (
-      <div className="result" key={index}>
-        <p style={{ color: colors[index] }} key={index}>
-          {task}{" "}
-        </p>
-        <button className="delete_item" onClick={() => deleteTask(index)}>
-          x
-        </button>
-        <select
-          value={colors[index]}
-          onChange={(event) =>
-            setColors({ ...colors, [index]: event.target.value })
-          }
-        >
-          {colorOptions.map((text, index) => {
-            return <option key={index}>{text}</option>;
-          })}
-        </select>
-      </div>
-    );
-  });
-
   return (
     <div>
-      <input
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
-      />
-      <Tasks />
-      <div>{result}</div>
-
+      <input value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
+      <Tasks tasks={tasks} colors={colors} setColors={setColors} colorOptions={colorOptions} deleteTask={deleteTask}  />
       <Buttons addTask={addTask} resetInput={resetInput} />
-
     </div>
   );
 }
